@@ -1,358 +1,374 @@
 /* ===================================================
-   CSS CUSTOM PROPERTIES (VARIABLES)
+   VARIABLES 
    =================================================== */
-
 :root {
-    /* Colors */
-    --color-primary: #0066cc;
-    --color-secondary: #ff6b6b;
-    --color-success: #51cf66;
-    --color-warning: #ffd43b;
-    --color-danger: #ff6b6b;
-    --color-border: #e0e0e0;
-    --color-text: #333;
-    --color-bg: #f5f5f5;
-    --color-white: #ffffff;
-    
-    /* Spacing */
-    --space-1: 0.25rem; 
-    --space-2: 0.5rem;
-    --space-3: 1rem;
-    --space-4: 1.5rem;
-    --space-5: 2rem;
-    
-    /* Shadows */
-    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
-    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
-    
-    /* Border Radius */
-    --radius-sm: 4px;
-    --radius-md: 8px;
-    --radius-lg: 12px;
+  /* Brand Colors */
+  --color-primary: #ED1C24; /* CanJet Red */
+  --color-secondary: #0056b3; /* Blue */
+  --color-accent: #f59e0b; /* Gold/Yellow */
+
+  /* Semantic */
+  --color-success: #22c55e;
+  --color-warning: #f59e0b;
+  --color-danger: #ef4444;
+
+  /* Neutrals */
+  --color-surface: #ffffff;
+  --color-background: #f9faf9;
+  --color-muted: #64748b; 
+  --color-text: #1e293b;
+  --color-border: #e2e8f0;
+
+  /* Typography */
+  --font-family-sans: "Poppins", system-ui, -apple-system, sans-serif;
+  --font-serif: "Georgia", "Times New Roman", Times, serif;
+
+  /* Spacing & Layout */
+  --radius-lg: 12px;
+  --radius-md: 8px;
+  --radius-sm: 4px;
+
+  --space-2: 0.5rem;  
+  --space-3: 0.75rem;
+  --space-4: 1rem;  
+  --space-6: 1.5rem;  
+  --space-8: 2rem;  
+
+  /* Layout Borders */
+  --radius-lg: 0px;
+  --radius-md: 0px;
+  --radius-sm: 0px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
 }
 
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--font-family-sans);
+  color: var(--color-text);
+  background: var(--color-background);
+  line-height: 1.5;
+}
+
+h1, h2, h3, p { margin: 0; }
 /* ===================================================
-   GLOBAL STYLES
-   =================================================== */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html, body {
-    font-family: 'Poppins', sans-serif;
-    color: var(--color-text);
-    background-color: var(--color-bg);
-    line-height: 1.6;
-}
-
-/* ===================================================
-   LAYOUT & CONTAINERS
-   =================================================== */
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 var(--space-5);
-}
-
-/* ===================================================
-   HEADER STYLES
+   HEADER 
    =================================================== */
 
 .top-header {
-    background-color: var(--color-white);
-    border-bottom: 2px solid var(--color-border);
-    padding: var(--space-4) 0;
-    box-shadow: var(--shadow-sm);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  padding: 0;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: var(--space-8);
+}
+
+.top-header .container {
+  max-width: none;       
+  width: 100%;       
+  padding: 0 20px;      
 }
 
 .header-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--space-4);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .header-left {
-    display: flex;
-    align-items: center;
-    gap: var(--space-5);
-}
-
-.brand {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
+  gap: var(--space-8); 
+  flex: 1; 
 }
 
 .brand-logo {
-    height: 40px;
-    width: auto;
+  height: 40px;
+  width: auto;
+  display: block;
 }
 
 .top-nav {
-    display: flex;
-    gap: var(--space-4);
-    list-style: none;
+  display: flex;
+  gap: var(--space-6);
+  height: 70px; 
 }
 
 .nav-link {
-    text-decoration: none;
-    color: var(--color-text);
-    font-weight: 500;
-    padding: var(--space-2) var(--space-3);
-    border-radius: var(--radius-sm);
-    transition: all 0.3s ease;
+  text-decoration: none;
+  color: var(--color-muted);
+  font-weight: 500;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  border-bottom: 3px solid transparent; 
+  transition: all 0.2s;
+  height: 100%;
 }
 
-.nav-link:hover,
+.nav-link:hover {
+  color: var(--color-text);
+}
+
 .nav-link.active {
-    background-color: var(--color-primary);
-    color: var(--color-white);
+  color: var(--color-primary);
+  border-bottom-color: var(--color-primary);
+  font-weight: 700;
 }
 
 .report-title {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--color-primary);
-    text-align: center;
-    flex: 1;
+  font-size: 1.125rem; 
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-text);
+  font-weight: 700;
+  text-align: center;
+  white-space: nowrap; 
 }
 
 .header-right {
-    width: 100px;
+  flex: 1; 
 }
 
 /* ===================================================
-   GRID & SECTIONS
+   DASHBOARD LAYOUT & HEADER
    =================================================== */
 
-.grid {
-    display: grid;
-    gap: var(--space-4);
-    margin-bottom: var(--space-5);
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-6);
 }
 
-.grid.cols-3 {
-    grid-template-columns: repeat(3, 1fr);
+/* Top Header Styles */
+.top-header {
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  padding: var(--space-4) 0;
+  margin-bottom: var(--space-8);
+  box-shadow: var(--shadow-sm);
 }
 
-.grid.cols-2 {
-    grid-template-columns: repeat(2, 1fr);
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.brand-logo {
+  height: 40px;
+  width: auto;
+}
+
+.brand-subtitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-muted);
+  letter-spacing: -0.5px;
+}
+
+.report-title {
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+/* ===================================================
+   CARDS & SECTIONS
+   =================================================== */
 
 .section-row {
-    width: 100%;
+  margin-bottom: var(--space-6);
 }
-
-/* ===================================================
-   CARDS
-   =================================================== */
 
 .card {
-    background-color: var(--color-white);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    padding: var(--space-5);
-    box-shadow: var(--shadow-sm);
-    transition: all 0.3s ease;
-}
-
-.card:hover {
-    box-shadow: var(--shadow-lg);
-    border-color: var(--color-primary);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
 }
 
 .card-header-flex {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: var(--space-3);
-    gap: var(--space-3);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-2);
 }
 
+/* Typography inside cards */
 .card h3 {
-    font-size: 1.25rem;
-    color: var(--color-primary);
-    margin-bottom: var(--space-3);
-}
-
-/* ===================================================
-   KPI STYLES
-   =================================================== */
-
-.kpi-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 120px;
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--color-primary);
-}
-
-/* ===================================================
-   CHART STYLES
-   =================================================== */
-
-.chart-container {
-    min-height: 350px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.chart-container-lg {
-    min-height: 450px;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--color-text);
 }
 
 .chart-subtitle {
-    font-size: 0.9rem;
-    color: #666;
-    margin-bottom: var(--space-3);
-    font-weight: 400;
+  font-size: 0.875rem;
+  color: var(--color-muted);
+  margin-bottom: var(--space-4);
+  font-weight: 400;
 }
 
 /* ===================================================
-   FORM CONTROLS
+   GRID SYSTEM
+   =================================================== */
+.grid {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+.grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+.grid.cols-1-2 { grid-template-columns: 1fr 2fr; gap: var(--space-4); }
+
+@media (max-width: 900px) {
+  .grid.cols-3, .grid.cols-2, .grid.cols-1-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===================================================
+   CHART CONTAINERS & CONTROLS
    =================================================== */
 
-.chart-control-select,
+/* Standard Chart Container */
+.chart-container {
+  position: relative;
+  height: 300px;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Large Chart Container (Scatter plot) */
+.chart-container-lg {
+  position: relative;
+  height: 400px;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Controls (Dropdowns & Buttons) */
+.chart-control-select {
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  font-family: var(--font-family-sans);
+  color: var(--color-text);
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
 .chart-control-btn {
-    padding: var(--space-2) var(--space-3);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-sm);
-    font-family: 'Poppins', sans-serif;
-    background-color: var(--color-white);
-    color: var(--color-text);
-    cursor: pointer;
-    transition: all 0.3s ease;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  padding: 4px 12px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-primary);
+  transition: all 0.2s;
 }
 
-.chart-control-select:hover,
 .chart-control-btn:hover {
-    border-color: var(--color-primary);
-    background-color: var(--color-primary);
-    color: var(--color-white);
-}
-
-.chart-control-select:focus,
-.chart-control-btn:focus {
-    outline: none;
-    border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+  background: var(--color-background);
+  border-color: var(--color-primary);
 }
 
 /* ===================================================
-   TOOLTIPS & INTERACTIVE ELEMENTS
+   6. KPI WIDGETS
    =================================================== */
 
-/* Tooltip styling */
-.tooltip {
-    position: absolute;
-    background: rgba(255, 255, 255, 0.95);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-sm);
-    padding: var(--space-3);
-    pointer-events: none;
-    font-size: 0.875rem;
-    box-shadow: var(--shadow-md);
-    z-index: 100;
-    max-width: 200px;
+.kpi-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100px; 
 }
 
-.tooltip h4 {
-    margin: 0 0 4px 0;
-    color: var(--color-primary);
-    font-size: 0.9rem;
+.kpi-value {
+  font-family: var(--font-serif); 
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  line-height: 1;
 }
 
-.tooltip p {
-    margin: 2px 0;
+.kpi-label {
+  font-size: 0.875rem;
+  color: var(--color-muted);
+  margin-top: var(--space-2);
 }
 
-/* Brush styling */
-.brush .selection {
-    fill: var(--color-primary);
-    fill-opacity: 0.1;
-    stroke: var(--color-primary);
-    stroke-width: 1px;
-    stroke-dasharray: 3,3;
+.kpi-delta {
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-left: 8px;
+}
+.kpi-delta.positive { color: var(--color-success); }
+.kpi-delta.negative { color: var(--color-danger); }
+
+/* ===================================================
+   D3.js SPECIFICS 
+   =================================================== */
+
+svg text, 
+.axis-label, 
+.legend-text {
+  font-family: var(--font-serif) !important;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .container {
-        padding: 0 var(--space-3);
-    }
-    
-    .top-header .container {
-        padding: 0 var(--space-3);
-    }
-    
-    .header-content {
-        flex-wrap: wrap;
-        gap: var(--space-3);
-    }
-    
-    .report-title {
-        font-size: 1rem;
-        order: 3;
-        width: 100%;
-        text-align: center;
-        margin-top: var(--space-2);
-    }
-    
-    .top-nav {
-        gap: var(--space-3);
-    }
-    
-    .nav-link {
-        font-size: 0.85rem;
-    }
-    
-    .kpi-value {
-        font-size: 2.5rem;
-    }
-    
-    .chart-container, .chart-container-lg {
-        height: 250px;
-    }
+/* Legend Styling */
+.legend-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 300px;
+  overflow-y: auto;
 }
 
-@media (max-width: 480px) {
-    .grid.cols-3, .grid.cols-2 {
-        gap: var(--space-4);
-    }
-    
-    .card {
-        padding: var(--space-4);
-    }
-    
-    .chart-control-select {
-        font-size: 0.8rem;
-        padding: 2px 6px;
-    }
-    
-    .chart-control-btn {
-        font-size: 0.8rem;
-        padding: 2px 8px;
-    }
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  opacity: 1;
+  transition: opacity 0.2s;
+  font-family: var(--font-serif) !important;
 }
 
-/* Print styles */
-@media print {
-    .top-nav, .chart-controls {
-        display: none;
-    }
-    
-    .card {
-        break-inside: avoid;
-        border: 1px solid #000;
-        box-shadow: none;
-    }
+.legend-item:hover {
+  opacity: 0.7;
+}
+
+.legend-item.inactive {
+  opacity: 0.3;
+  text-decoration: line-through;
+}
+
+.legend-color-box {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  flex-shrink: 0;
 }
