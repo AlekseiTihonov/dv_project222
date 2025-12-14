@@ -1,0 +1,292 @@
+/* ===================================================
+   1. VARIABLES & RESET (From Project 1)
+   =================================================== */
+:root {
+  /* Brand Colors */
+  --color-primary: #ED1C24; /* CanJet Red */
+  --color-secondary: #0056b3; /* Blue */
+  --color-accent: #f59e0b; /* Gold/Yellow */
+
+  /* Semantic */
+  --color-success: #22c55e;
+  --color-warning: #f59e0b;
+  --color-danger: #ef4444;
+
+  /* Neutrals */
+  --color-surface: #ffffff;
+  --color-background: #f9faf9;
+  --color-muted: #64748b; 
+  --color-text: #1e293b;
+  --color-border: #e2e8f0;
+
+  /* Typography */
+  --font-family-sans: "Poppins", system-ui, -apple-system, sans-serif;
+  --font-serif: "Georgia", "Times New Roman", Times, serif;
+
+  /* Spacing & Layout */
+  --radius-lg: 12px;
+  --radius-md: 8px;
+  --radius-sm: 4px;
+
+  --space-2: 0.5rem;  
+  --space-3: 0.75rem;
+  --space-4: 1rem;  
+  --space-6: 1.5rem;  
+  --space-8: 2rem;  
+
+  /* Layout Borders */
+  --radius-lg: 0px;
+  --radius-md: 0px;
+  --radius-sm: 0px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--font-family-sans);
+  color: var(--color-text);
+  background: var(--color-background);
+  line-height: 1.5;
+}
+
+h1, h2, h3, p { margin: 0; }
+
+/* ===================================================
+   2. DASHBOARD LAYOUT & HEADER
+   =================================================== */
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+}
+
+/* Top Header Styles */
+.top-header {
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  padding: var(--space-4) 0;
+  margin-bottom: var(--space-8);
+  box-shadow: var(--shadow-sm);
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.brand-logo {
+  height: 40px;
+  width: auto;
+}
+
+.brand-subtitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-muted);
+  letter-spacing: -0.5px;
+}
+
+.report-title {
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+/* ===================================================
+   3. CARDS & SECTIONS
+   =================================================== */
+
+.section-row {
+  margin-bottom: var(--space-6);
+}
+
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+}
+
+.card-header-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-2);
+}
+
+/* Typography inside cards */
+.card h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.chart-subtitle {
+  font-size: 0.875rem;
+  color: var(--color-muted);
+  margin-bottom: var(--space-4);
+  font-weight: 400;
+}
+
+/* ===================================================
+   4. GRID SYSTEM (Reused)
+   =================================================== */
+.grid {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+.grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+.grid.cols-1-2 { grid-template-columns: 1fr 2fr; gap: var(--space-4); }
+
+@media (max-width: 900px) {
+  .grid.cols-3, .grid.cols-2, .grid.cols-1-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===================================================
+   5. CHART CONTAINERS & CONTROLS
+   =================================================== */
+
+/* Standard Chart Container */
+.chart-container {
+  position: relative;
+  height: 300px;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Large Chart Container (Scatter plot) */
+.chart-container-lg {
+  position: relative;
+  height: 400px;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Controls (Dropdowns & Buttons) */
+.chart-control-select {
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  font-family: var(--font-family-sans);
+  color: var(--color-text);
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.chart-control-btn {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  padding: 4px 12px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-primary);
+  transition: all 0.2s;
+}
+
+.chart-control-btn:hover {
+  background: var(--color-background);
+  border-color: var(--color-primary);
+}
+
+/* ===================================================
+   6. KPI WIDGETS
+   =================================================== */
+
+.kpi-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100px; 
+}
+
+.kpi-value {
+  font-family: var(--font-serif); 
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  line-height: 1;
+}
+
+.kpi-label {
+  font-size: 0.875rem;
+  color: var(--color-muted);
+  margin-top: var(--space-2);
+}
+
+.kpi-delta {
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-left: 8px;
+}
+.kpi-delta.positive { color: var(--color-success); }
+.kpi-delta.negative { color: var(--color-danger); }
+
+/* ===================================================
+   7. D3.js SPECIFICS (Fonts & Legends)
+   =================================================== */
+
+svg text, 
+.axis-label, 
+.legend-text {
+  font-family: var(--font-serif) !important;
+}
+
+/* Legend Styling */
+.legend-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  opacity: 1;
+  transition: opacity 0.2s;
+  font-family: var(--font-serif) !important;
+}
+
+.legend-item:hover {
+  opacity: 0.7;
+}
+
+.legend-item.inactive {
+  opacity: 0.3;
+  text-decoration: line-through;
+}
+
+.legend-color-box {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}

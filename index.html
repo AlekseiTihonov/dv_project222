@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CanJet Customer Service Dashboard</title>
+
+    <link rel="stylesheet" href="styles.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <header class="top-header">
+        <div class="container header-content">
+            <div class="brand">
+                <img src="img/logo.png" alt="CanJet Logo" class="brand-logo">
+                <h1 class="site-title brand-subtitle">Dashboard</h1>
+            </div>
+            <h2 class="report-title">Customer Satisfaction Report</h2>
+            <div style="width: 150px;"></div> 
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <section class="grid cols-3 section-row">
+            <article class="card">
+                <h3 class="chart-subtitle">Loyal Customers</h3>
+                <div id="kpi-loyal" class="kpi-container"></div> 
+            </article>
+
+            <article class="card">
+                <h3 class="chart-subtitle">Total Flight Distance</h3>
+                <div id="kpi-distance" class="kpi-container"></div>
+            </article>
+
+            <article class="card">
+                <h3 class="chart-subtitle">No Delays Count</h3>
+                <div id="kpi-nodelay" class="kpi-container"></div>
+            </article>
+        </section>
+
+        <section class="grid cols-2 section-row">
+            
+            <article class="card">
+                <div class="card-header-flex">
+                    <h3>Service Ratings Distribution</h3>
+                    <select id="category-select" class="chart-control-select">
+                        <option value="Checkin service">Checkin service</option>
+                        <option value="Ease of Online booking">Ease of Online booking</option>
+                        <option value="Gate location">Gate location</option>
+                        <option value="On-board service">On-board service</option>
+                        <option value="Baggage handling">Baggage Handling</option>
+                    </select>
+                </div>
+                <p class="chart-subtitle">Count of answers (1-5) for selected category</p>
+                <div id="chart-bar-ratings" class="chart-container"></div>
+            </article>
+
+            <article class="card">
+                <h3>Flight Distance per Customer</h3>
+                <p class="chart-subtitle">Distance travelled (Hover for details)</p>
+                <div id="chart-line-distance" class="chart-container"></div>
+            </article>
+        </section>
+
+        <section class="grid cols-2 section-row">
+            
+            <article class="card">
+                <h3>Delay vs. Dep./Arr. Time Convenience Rating</h3>
+                <p class="chart-subtitle">
+                    Correlation: Total Delay Minutes vs. Time Convenience
+                </p>
+                <div id="chart-scatter-delay" class="chart-container-lg"></div>
+            </article>
+
+            <article class="card">
+                <h3>Satisfaction Distribution</h3>
+                <p class="chart-subtitle">Satisfied vs. Neutral vs. Unsatisfied</p>
+                <div class="grid cols-1-2" style="align-items: center;">
+                    <div id="chart-donut-satisfaction" class="chart-container"></div>
+                    <div id="legend-satisfaction" class="legend-wrapper"></div> 
+                </div>
+            </article>
+        </section>
+
+        <section class="grid cols-2 section-row">
+            
+            <article class="card">
+                <h3>Disloyal Customer Ticket Prices</h3>
+                <p class="chart-subtitle">Ticket prices for first 15 disloyal customers</p>
+                <div id="chart-stacked-prices" class="chart-container"></div>
+            </article>
+
+            <article class="card">
+                <h3>Avg Satisfaction by Seat Class</h3>
+                <p class="chart-subtitle">Business, Eco, Eco Plus</p>
+                <div id="chart-bar-seat" class="chart-container"></div>
+            </article>
+        </section>
+
+    </main>
+
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    
+    <script src="js/modules/chart-bar-ratings.js"></script>
+    <script src="js/modules/chart-bar-seat.js"></script>
+    <script src="js/modules/chart-donut-satisfaction.js"></script>
+    <script src="js/modules/chart-line-distance.js"></script>
+    <script src="js/modules/chart-scatter-delay.js"></script>
+    <script src="js/modules/chart-stacked-prices.js"></script>
+    <script src="js/modules/interactions.js"></script>
+    <script src="js/modules/kpi-distance.js"></script>
+    <script src="js/modules/kpi-loyal.js"></script>
+    <script src="js/modules/kpi-nodelay.js"></script>
+
+    <script src="js/main.js"></script> 
+</body>
+</html>
