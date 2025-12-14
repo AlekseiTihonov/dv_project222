@@ -4,25 +4,211 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CanJet Customer Service Dashboard</title>
-
-    <link rel="stylesheet" href="styles.css">
+    
+    <!-- INLINE STYLES -->
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+            background: #f9faf9;
+            color: #1e293b;
+            line-height: 1.5;
+        }
+        
+        /* Header */
+        .top-header {
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 15px 0;
+            margin-bottom: 30px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .report-title {
+            font-size: 1.3rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #1e293b;
+            font-weight: 600;
+        }
+        
+        /* Grid system */
+        .grid {
+            display: grid;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .cols-3 { grid-template-columns: repeat(3, 1fr); }
+        .cols-2 { grid-template-columns: repeat(2, 1fr); }
+        
+        @media (max-width: 900px) {
+            .cols-3, .cols-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Cards */
+        .card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .card h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #1e293b;
+        }
+        
+        .chart-subtitle {
+            font-size: 0.875rem;
+            color: #64748b;
+            margin-bottom: 15px;
+        }
+        
+        /* KPI containers */
+        .kpi-container {
+            height: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .kpi-value {
+            font-family: 'Georgia', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ED1C24;
+            line-height: 1;
+        }
+        
+        .kpi-label {
+            font-size: 0.875rem;
+            color: #64748b;
+            margin-top: 8px;
+        }
+        
+        /* Chart containers */
+        .chart-container {
+            height: 250px;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        .chart-container-lg {
+            height: 300px;
+        }
+        
+        /* Navigation */
+        .top-nav {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .nav-link {
+            text-decoration: none;
+            color: #64748b;
+            font-weight: 500;
+            padding: 5px 0;
+            cursor: pointer;
+        }
+        
+        .nav-link.active {
+            color: #ED1C24;
+            border-bottom: 3px solid #ED1C24;
+            font-weight: 700;
+        }
+        
+        /* Controls */
+        .chart-control-select {
+            padding: 6px 12px;
+            border-radius: 4px;
+            border: 1px solid #e2e8f0;
+            font-family: 'Poppins', sans-serif;
+            color: #1e293b;
+            font-size: 0.875rem;
+        }
+        
+        .chart-control-btn {
+            background: white;
+            border: 1px solid #e2e8f0;
+            padding: 6px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #ED1C24;
+            margin-right: 10px;
+            margin-top: 10px;
+        }
+        
+        .chart-control-btn:hover {
+            background: #f9faf9;
+        }
+        
+        /* Main container */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 40px;
+        }
+        
+        /* Legend */
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            font-family: 'Georgia', serif;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .kpi-value {
+                font-size: 2rem;
+            }
+            
+            .chart-container {
+                height: 200px;
+            }
+        }
+    </style>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Georgia:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
-
     <header class="top-header">
-        <div class="container header-content">
-            <div class="header-left">
+        <div class="header-content">
+            <div style="display: flex; align-items: center; gap: 30px;">
                 <div class="brand">
-                    <img src="img/logo.png" alt="CanJet Logo" class="brand-logo">
+                    <img src="img/logo.png" alt="CanJet Logo" class="brand-logo" style="height: 40px; width: auto;">
                 </div>
                 
                 <nav class="top-nav">
-                    <a href="#" class="nav-link active" aria-current="page">Overview</a>
+                    <a href="#" class="nav-link active">Overview</a>
                     <a href="#" class="nav-link">Analytics</a>
                     <a href="#" class="nav-link">Settings</a>
                 </nav>
@@ -30,33 +216,41 @@
 
             <h2 class="report-title">CUSTOMER SATISFACTION REPORT</h2>
 
-            <div class="header-right"></div>
+            <div style="width: 40px;"></div>
         </div>
     </header>
 
-    <main class="container">
+    <main class="main-container">
         
-        <section class="grid cols-3 section-row">
+        <section class="grid cols-3">
             <article class="card">
                 <h3 class="chart-subtitle">Loyal Customers</h3>
-                <div id="kpi-loyal" class="kpi-container"></div> 
+                <div id="kpi-loyal" class="kpi-container">
+                    <div class="kpi-value">0</div>
+                    <div class="kpi-label">Loading data...</div>
+                </div> 
             </article>
 
             <article class="card">
                 <h3 class="chart-subtitle">Total Flight Distance</h3>
-                <div id="kpi-distance" class="kpi-container"></div>
+                <div id="kpi-distance" class="kpi-container">
+                    <div class="kpi-value">0 km</div>
+                    <div class="kpi-label">Loading data...</div>
+                </div>
             </article>
 
             <article class="card">
                 <h3 class="chart-subtitle">No Delays Count</h3>
-                <div id="kpi-nodelay" class="kpi-container"></div>
+                <div id="kpi-nodelay" class="kpi-container">
+                    <div class="kpi-value">0</div>
+                    <div class="kpi-label">Loading data...</div>
+                </div>
             </article>
         </section>
 
-        <section class="grid cols-2 section-row">
-            
+        <section class="grid cols-2">
             <article class="card">
-                <div class="card-header-flex">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                     <h3>Service Ratings Distribution</h3>
                     <select id="category-select" class="chart-control-select">
                         <option value="Checkin service">Checkin service</option>
@@ -72,61 +266,59 @@
 
             <article class="card">
                 <h3>Flight Distance per Customer</h3>
-                <p class="chart-subtitle">Distance travelled (Hover for details)</p>
+                <p class="chart-subtitle">Distance travelled (First 30 customers)</p>
                 <div id="chart-line-distance" class="chart-container"></div>
             </article>
         </section>
 
-        <section class="grid cols-2 section-row">
-            
+        <section class="grid cols-2">
             <article class="card">
-                <h3>Delay vs. Dep./Arr. Time Convenience Rating</h3>
-                <p class="chart-subtitle">
-                    Correlation: Total Delay Minutes vs. Time Convenience
-                </p>
+                <h3>Delay vs. Time Convenience Rating</h3>
+                <p class="chart-subtitle">Correlation: Delay Minutes vs. Convenience</p>
                 <div id="chart-scatter-delay" class="chart-container-lg"></div>
+                <div>
+                    <button id="zoom-in-btn" class="chart-control-btn">Zoom In</button>
+                    <button id="zoom-out-btn" class="chart-control-btn">Zoom Out</button>
+                    <button id="reset-zoom-btn" class="chart-control-btn">Reset</button>
+                </div>
             </article>
 
             <article class="card">
                 <h3>Satisfaction Distribution</h3>
                 <p class="chart-subtitle">Satisfied vs. Neutral vs. Unsatisfied</p>
-                <div class="grid cols-1-2" style="align-items: center;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: center;">
                     <div id="chart-donut-satisfaction" class="chart-container"></div>
-                    <div id="legend-satisfaction" class="legend-wrapper"></div> 
+                    <div id="legend-satisfaction"></div>
                 </div>
             </article>
         </section>
 
-        <section class="grid cols-2 section-row">
-            
+        <section class="grid cols-2">
             <article class="card">
                 <h3>Disloyal Customer Ticket Prices</h3>
                 <p class="chart-subtitle">Ticket prices for first 15 disloyal customers</p>
                 <div id="chart-stacked-prices" class="chart-container"></div>
+                <div>
+                    <label style="font-size: 0.875rem;">
+                        <input type="checkbox" id="toggle-stacked" checked> Stacked View
+                    </label>
+                </div>
             </article>
 
             <article class="card">
                 <h3>Avg Satisfaction by Seat Class</h3>
                 <p class="chart-subtitle">Business, Eco, Eco Plus</p>
                 <div id="chart-bar-seat" class="chart-container"></div>
+                <button id="toggle-chart-style" class="chart-control-btn">Switch to Horizontal</button>
             </article>
         </section>
 
     </main>
 
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    
-    <script src="js/modules/chart-bar-ratings.js"></script>
-    <script src="js/modules/chart-bar-seat.js"></script>
-    <script src="js/modules/chart-donut-satisfaction.js"></script>
-    <script src="js/modules/chart-line-distance.js"></script>
-    <script src="js/modules/chart-scatter-delay.js"></script>
-    <script src="js/modules/chart-stacked-prices.js"></script>
-    <script src="js/modules/interactions.js"></script>
-    <script src="js/modules/kpi-distance.js"></script>
-    <script src="js/modules/kpi-loyal.js"></script>
-    <script src="js/modules/kpi-nodelay.js"></script>
+    <!-- Tooltip container for charts -->
+    <div id="tooltip" class="tooltip" style="position: absolute; opacity: 0; pointer-events: none;"></div>
 
-    <script src="js/main.js"></script> 
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script type="module" src="js/main.js"></script>
 </body>
 </html>
