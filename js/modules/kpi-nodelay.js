@@ -11,7 +11,8 @@ function renderKpiNodelay() {
     const percentage = ((noDelayCount / globalData.length) * 100).toFixed(1);
     
     const container = d3.select("#kpi-nodelay");
-    
+
+    // Add KPI value with animation
     container
         .html("")
         .style("opacity", 0);
@@ -35,6 +36,7 @@ function renderKpiNodelay() {
         .attr("class", "kpi-label")
         .text(`customers (${percentage}%) experienced no delays`);
     
+    // Fade in
     container.transition()
         .duration(Math.round(ANIM_DURATION/2))
         .style("opacity", 1);

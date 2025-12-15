@@ -3,9 +3,9 @@
    =================================================== */
 :root {
   /* Brand Colors */
-  --color-primary: #ED1C24; /* CanJet Red */
+  --color-primary: #ED1C24; /* Red */
   --color-secondary: #0056b3; /* Blue */
-  --color-accent: #f59e0b; /* Gold/Yellow */
+  --color-accent: #f59e0b; /* Yellow */
 
   /* Semantic */
   --color-success: #22c55e;
@@ -23,21 +23,11 @@
   --font-family-sans: "Poppins", system-ui, -apple-system, sans-serif;
   --font-serif: "Georgia", "Times New Roman", Times, serif;
 
-  /* Spacing & Layout */
-  --radius-lg: 12px;
-  --radius-md: 8px;
-  --radius-sm: 4px;
-
   --space-2: 0.5rem;  
   --space-3: 0.75rem;
   --space-4: 1rem;  
   --space-6: 1.5rem;  
   --space-8: 2rem;  
-
-  /* Layout Borders */
-  --radius-lg: 0px;
-  --radius-md: 0px;
-  --radius-sm: 0px;
 
   /* Shadows */
   --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
@@ -62,8 +52,8 @@ h1, h2, h3, p { margin: 0; }
 .top-header {
   background: var(--color-surface);
   border-bottom: 1px solid var(--color-border);
-  padding: 0;
-  height: 70px;
+  padding: var(--space-4) 0;    
+  height: 70px;         
   display: flex;
   align-items: center;
   box-shadow: var(--shadow-sm);
@@ -148,15 +138,7 @@ h1, h2, h3, p { margin: 0; }
   padding: 0 var(--space-6);
 }
 
-/* Top Header Styles */
-.top-header {
-  background: var(--color-surface);
-  border-bottom: 1px solid var(--color-border);
-  padding: var(--space-4) 0;
-  margin-bottom: var(--space-8);
-  box-shadow: var(--shadow-sm);
-}
-
+/* Header Styles */
 .header-content {
   display: flex;
   justify-content: space-between;
@@ -258,7 +240,7 @@ h1, h2, h3, p { margin: 0; }
   overflow: hidden;
 }
 
-/* Large Chart Container (Scatter plot) */
+/* Large Chart Container */
 .chart-container-lg {
   position: relative;
   height: 400px;
@@ -266,7 +248,7 @@ h1, h2, h3, p { margin: 0; }
   overflow: hidden;
 }
 
-/* Controls (Dropdowns & Buttons) */
+/* Controls */
 .chart-control-select {
   padding: 4px 8px;
   border-radius: var(--radius-sm);
@@ -334,7 +316,7 @@ h1, h2, h3, p { margin: 0; }
 svg text, 
 .axis-label, 
 .legend-text {
-  font-family: var(--font-serif) !important;
+  font-family: var(--font-serif);
 }
 
 /* Legend Styling */
@@ -354,7 +336,7 @@ svg text,
   cursor: pointer;
   opacity: 1;
   transition: opacity 0.2s;
-  font-family: var(--font-serif) !important;
+  font-family: var(--font-serif);
 }
 
 .legend-item:hover {
@@ -371,4 +353,24 @@ svg text,
   height: 12px;
   border-radius: 2px;
   flex-shrink: 0;
+}
+
+/* Color Picker Buttons */
+.color-btn {
+  width: 24px;
+  height: 24px;
+  border: 2px solid transparent; 
+  border-radius: 4px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  padding: 0;
+}
+
+.color-btn:hover {
+  transform: scale(1.1);
+}
+
+.color-btn.active {
+  border-color: var(--color-text); 
+  box-shadow: 0 0 0 2px var(--color-surface), 0 0 0 4px var(--color-border);
 }

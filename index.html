@@ -36,6 +36,7 @@
 
     <main class="container">
         
+        <!-- KPI Section -->
         <section class="grid cols-3 section-row">
             <article class="card">
                 <h3 class="chart-subtitle">Loyal Customers</h3>
@@ -53,34 +54,50 @@
             </article>
         </section>
 
+        <!-- Ratings & Distance Section -->
         <section class="grid cols-2 section-row">
-            
             <article class="card">
                 <div class="card-header-flex">
-                    <h3>Service Ratings Distribution</h3>
+                    <h3>Service Ratings</h3>
                     <select id="category-select" class="chart-control-select">
                         <option value="Checkin service">Checkin service</option>
                         <option value="Ease of Online booking">Ease of Online booking</option>
                         <option value="Gate location">Gate location</option>
                         <option value="On-board service">On-board service</option>
-                        <option value="Baggage handling">Baggage Handling</option>
+                        <option value="Baggage handling">Baggage handling</option>
                     </select>
                 </div>
-                <p class="chart-subtitle">Count of answers (1-5) for selected category</p>
+                <p class="chart-subtitle">Distribution of ratings (1-5)</p>
                 <div id="chart-bar-ratings" class="chart-container"></div>
             </article>
 
             <article class="card">
-                <h3>Flight Distance per Customer</h3>
-                <p class="chart-subtitle">Distance travelled (Hover for details)</p>
+
+            <article class="card">
+                <div class="card-header-flex">
+                    <h3>Flight Distance Analysis</h3>
+                    <div id="distance-color-controls" style="display: flex; gap: 8px;">
+                        <button class="color-btn active" data-color="primary" style="background-color: var(--color-primary);" title="Red"></button>
+                        <button class="color-btn" data-color="secondary" style="background-color: var(--color-secondary);" title="Blue"></button>
+                        <button class="color-btn" data-color="accent" style="background-color: var(--color-accent);" title="Gold"></button>
+                    </div>
+                </div>
+                <p class="chart-subtitle">Distance per customer (Sample)</p>
                 <div id="chart-line-distance" class="chart-container"></div>
             </article>
         </section>
 
+        <!-- Scatter & Donut Section -->
         <section class="grid cols-2 section-row">
-            
             <article class="card">
-                <h3>Delay vs. Dep./Arr. Time Convenience Rating</h3>
+                <div class="card-header-flex">
+                    <h3>Delay vs. Dep./Arr. Time Convenience Rating</h3>
+                    <div class="chart-controls" style="display: flex; gap: 5px;">
+                        <button id="zoom-in" class="chart-control-btn" title="Zoom In">+</button>
+                        <button id="zoom-out" class="chart-control-btn" title="Zoom Out">-</button>
+                        <button id="zoom-reset" class="chart-control-btn" title="Reset Zoom">Reset</button>
+                    </div>
+                </div>
                 <p class="chart-subtitle">
                     Correlation: Total Delay Minutes vs. Time Convenience
                 </p>
@@ -89,24 +106,28 @@
 
             <article class="card">
                 <h3>Satisfaction Distribution</h3>
-                <p class="chart-subtitle">Satisfied vs. Neutral vs. Unsatisfied</p>
-                <div class="grid cols-1-2" style="align-items: center;">
+                <p class="chart-subtitle">Satisfied/Neutral vs. Unsatisfied</p>
+                <div style="display: flex; flex-direction: column; align-items: center;">
                     <div id="chart-donut-satisfaction" class="chart-container"></div>
-                    <div id="legend-satisfaction" class="legend-wrapper"></div> 
+                    <div id="legend-satisfaction" class="legend-wrapper" style="flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 15px; margin-top: 10px; width: 100%;"></div> 
                 </div>
             </article>
         </section>
 
+        <!-- Stacked & Seat Section -->
         <section class="grid cols-2 section-row">
-            
             <article class="card">
-                <h3>Disloyal Customer Ticket Prices</h3>
+                <div class="card-header-flex">
+                    <h3>Disloyal Customer Ticket Prices</h3>
+                </div>
                 <p class="chart-subtitle">Ticket prices for first 15 disloyal customers</p>
                 <div id="chart-stacked-prices" class="chart-container"></div>
             </article>
 
             <article class="card">
-                <h3>Avg Satisfaction by Seat Class</h3>
+                <div class="card-header-flex">
+                    <h3>Avg Satisfaction by Seat Class</h3>
+                </div>
                 <p class="chart-subtitle">Business, Eco, Eco Plus</p>
                 <div id="chart-bar-seat" class="chart-container"></div>
             </article>
@@ -115,18 +136,6 @@
     </main>
 
     <script src="https://d3js.org/d3.v7.min.js"></script>
-    
-    <script src="js/modules/chart-bar-ratings.js"></script>
-    <script src="js/modules/chart-bar-seat.js"></script>
-    <script src="js/modules/chart-donut-satisfaction.js"></script>
-    <script src="js/modules/chart-line-distance.js"></script>
-    <script src="js/modules/chart-scatter-delay.js"></script>
-    <script src="js/modules/chart-stacked-prices.js"></script>
-    <script src="js/modules/interactions.js"></script>
-    <script src="js/modules/kpi-distance.js"></script>
-    <script src="js/modules/kpi-loyal.js"></script>
-    <script src="js/modules/kpi-nodelay.js"></script>
-
-    <script src="js/main.js"></script> 
+    <script type="module" src="js/main.js"></script> 
 </body>
 </html>

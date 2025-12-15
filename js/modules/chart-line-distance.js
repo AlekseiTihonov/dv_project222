@@ -1,21 +1,32 @@
 import { globalData, ANIM_DURATION } from '../main.js';
 
-function renderLineDistance() {
-    if (!globalData) return;
+function renderLineDistance(colorTheme = 'primary') {
+    if (!globalData || globalData.length === 0) return;
     
-    // Sort data by distance
+    // Sort data
     const data = [...globalData]
         .sort((a, b) => a["Flight Distance"] - b["Flight Distance"])
-        .slice(0, 50); // Show first 50 for clarity
-    
+        .slice(0, 50); 
+
     const container = d3.select("#chart-line-distance");
-    const width = container.node().clientWidth;
-    const height = container.node().clientHeight;
+    if (container.empty()) return;
+
+    const styles = getComputedStyle(document.documentElement);
+    const colors = {
+        primary: styles.getPropertyValue('--color-primary').trim(),
+        secondary: styles.getPropertyValue('--color-secondary').trim(),
+        accent: styles.getPropertyValue('--color-accent').trim()
+    };
+    
+    // Select color 
+    const activeColor = colors[colorTheme] || colors.primary;
+
+    const width = container.node().clientWidth || 500;
+    const height = container.node().clientHeight || 300;
     const margin = {top: 30, right: 30, bottom: 50, left: 60};
     const chartWidth = width - margin.left - margin.right;
     const chartHeight = height - margin.top - margin.bottom;
     
-    // Clear previous
     container.selectAll("*").remove();
     
     // Create SVG
@@ -43,12 +54,12 @@ function renderLineDistance() {
         .y(d => yScale(d["Flight Distance"]))
         .curve(d3.curveMonotoneX);
     
-    // Draw line with transition
+    // Line animation 
     svg.append("path")
         .datum(data)
         .attr("class", "line")
         .attr("fill", "none")
-        .attr("stroke", "#ED1C24")
+        .attr("stroke", activeColor) 
         .attr("stroke-width", 3)
         .attr("stroke-linecap", "round")
         .attr("d", line)
@@ -63,8 +74,19 @@ function renderLineDistance() {
         .duration(Math.round(ANIM_DURATION * 1.2))
         .style("stroke-dashoffset", 0);
     
-    // Add circles for data points with tooltips
-    const tooltip = d3.select("#tooltip");
+    // Add circles for data points 
+    let tooltip = d3.select("#tooltip");
+    if (tooltip.empty()) {
+        tooltip = d3.select("body").append("div")
+            .attr("id", "tooltip")
+            .style("position", "absolute")
+            .style("background", "white")
+            .style("padding", "8px")
+            .style("border", "1px solid #ccc")
+            .style("border-radius", "4px")
+            .style("pointer-events", "none")
+            .style("opacity", 0);
+    }
     
     svg.selectAll(".data-point")
         .data(data)
@@ -74,11 +96,10 @@ function renderLineDistance() {
         .attr("cx", (d, i) => xScale(i))
         .attr("cy", d => yScale(d["Flight Distance"]))
         .attr("r", 0)
-        .attr("fill", "#ED1C24")
+        .attr("fill", activeColor)
         .attr("stroke", "white")
         .attr("stroke-width", 2)
         .on("mouseover", function(event, d) {
-            // Show tooltip
             tooltip.style("opacity", 0.95)
                 .html(`
                     <strong>Customer ID: ${d.id}</strong><br/>
@@ -89,23 +110,19 @@ function renderLineDistance() {
                 .style("left", (event.pageX + 10) + "px")
                 .style("top", (event.pageY - 28) + "px");
             
-            // Highlight point
             d3.select(this)
                 .transition()
-                .duration(Math.round(ANIM_DURATION/7))
+                .duration(200)
                 .attr("r", 6)
-                .attr("fill", "#0056b3");
+                .attr("fill", "#333");
         })
-        .on("mouseout", function(event, d) {
-            // Hide tooltip
+        .on("mouseout", function() {
             tooltip.style("opacity", 0);
-            
-            // Reset point
             d3.select(this)
                 .transition()
-                .duration(Math.round(ANIM_DURATION/7))
+                .duration(200)
                 .attr("r", 4)
-                .attr("fill", "#ED1C24");
+                .attr("fill", activeColor);
         })
         .transition()
             .delay((d, i) => i * 20 + Math.round(ANIM_DURATION/1.5))

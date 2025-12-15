@@ -9,12 +9,11 @@ function renderKpiLoyal() {
     
     const container = d3.select("#kpi-loyal");
     
-    // Clear and add transition
     container
         .html("")
         .style("opacity", 0);
     
-    // Add KPI value with counting animation
+    // Add KPI value with animation
     container.append("div")
         .attr("class", "kpi-value")
         .text(0)

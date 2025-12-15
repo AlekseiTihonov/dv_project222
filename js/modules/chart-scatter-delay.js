@@ -6,7 +6,7 @@ let currentTransform = d3.zoomIdentity;
 function renderScatterDelay() {
     if (!globalData) return;
     
-    // Filter out extreme outliers for better visualization
+    // Filter out extreme outliers
     const data = globalData.filter(d => 
         d["Total Departure and Arrival Delay in Minutes"] <= 300 &&
         d["Departure/Arrival time convenient"] >= 1
@@ -20,6 +20,11 @@ function renderScatterDelay() {
     const chartHeight = height - margin.top - margin.bottom;
     
     container.selectAll("*").remove();
+    
+    // Get CSS colors
+    const styles = getComputedStyle(document.documentElement);
+    const colorSuccess = styles.getPropertyValue('--color-success').trim();
+    const colorDanger = styles.getPropertyValue('--color-danger').trim();
     
     const svg = container.append("svg")
         .attr("width", width)
@@ -68,7 +73,7 @@ function renderScatterDelay() {
         .attr("font-size", "14px")
         .text("Time Convenience Rating (1-5)");
     
-    // Create brush for selection
+    // Create brush
     const brush = d3.brush()
         .extent([[0, 0], [chartWidth, chartHeight]])
         .on("brush", brushed)
@@ -87,7 +92,7 @@ function renderScatterDelay() {
         .attr("cx", d => xScale(d["Total Departure and Arrival Delay in Minutes"]))
         .attr("cy", d => yScale(d["Departure/Arrival time convenient"]))
         .attr("r", 0)
-        .attr("fill", d => d.satisfaction === "satisfied" ? "#22c55e" : "#ef4444")
+        .attr("fill", d => d.satisfaction === "satisfied" ? colorSuccess : colorDanger)
         .attr("opacity", 0.7)
         .transition()
         .delay((d, i) => i * Math.round(ANIM_DURATION/300))
@@ -168,7 +173,6 @@ function brushed(event) {
 
 function brushEnded(event) {
     if (!event.selection) {
-        // Reset all points when brush is cleared
         d3.select("#chart-scatter-delay").selectAll(".scatter-point")
             .attr("stroke", "none")
             .attr("stroke-width", 0);
